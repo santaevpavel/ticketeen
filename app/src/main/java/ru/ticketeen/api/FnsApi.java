@@ -9,9 +9,11 @@ interface FnsApi {
 
     String API_VERSION = "v1/";
 
+    String FILE_TYPE_JSON = "json";
+
     @GET(API_VERSION + "extract")
     Call<GetReceiptsResponse> getReceipts(
             @Query("sendToEmail") int sendToEmail,
-            @Query("fileType") String json);
+            @Query("fileType") String fileType);
 
 }
