@@ -12,6 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.ticketeen.api.response.GetReceiptsResponse;
 import ru.ticketeen.api.util.BasicAuthInterceptor;
+import ru.ticketeen.api.util.IUserCredentialsProvider;
 
 import static ru.ticketeen.api.FnsApi.FILE_TYPE_JSON;
 
@@ -20,9 +21,9 @@ public class ApiHelper {
     private static ApiHelper instance;
     private FnsApi api;
 
-    private ApiHelper(String fnsApiBaseUrl, String login, String password) {
+    public ApiHelper(String fnsApiBaseUrl, IUserCredentialsProvider userCredentialsProvider) {
         final OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new BasicAuthInterceptor(login, password))
+                .addInterceptor(new BasicAuthInterceptor(userCredentialsProvider))
                 .readTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .build();
@@ -42,11 +43,11 @@ public class ApiHelper {
         return instance;
     }
 
-    public static void init(String baseFnsApiUrl, String login, String password) {
+    public static void init(String baseFnsApiUrl, IUserCredentialsProvider userCredentialsProvider) {
         if (instance != null) {
             throw new IllegalStateException("Call method init() once");
         }
-        instance = new ApiHelper(baseFnsApiUrl, login, password);
+        instance = new ApiHelper(baseFnsApiUrl, userCredentialsProvider);
     }
 
     public GetReceiptsResponse getReceipts() {
