@@ -2,7 +2,8 @@ package ru.ticketeen;
 
 import org.junit.Test;
 
-import ru.ticketeen.api.ApiHelper;
+import ru.ticketeen.api.FnsApiRequester;
+import ru.ticketeen.api.response.GetLoginResponse;
 import ru.ticketeen.api.response.GetTicketResponse;
 import ru.ticketeen.util.UserCredentialsProvider;
 
@@ -20,9 +21,19 @@ public class FnsApiTest {
     private static final String PASSWORD = "705697";
 
     @Test
-    public void test() throws Exception {
-        ApiHelper apiHelper = new ApiHelper(FNS_API_URL, new UserCredentialsProvider(LOGIN, PASSWORD));
-        GetTicketResponse tickets = apiHelper.getTickets();
+    public void extract() throws Exception {
+        FnsApiRequester requester = new FnsApiRequester(FNS_API_URL,
+                new UserCredentialsProvider(LOGIN, PASSWORD));
+        GetTicketResponse tickets = requester.getTickets();
         assertNotNull("Url to download", tickets.url);
+    }
+
+    @Test
+    public void login() throws Exception {
+        FnsApiRequester requester = new FnsApiRequester(FNS_API_URL,
+                new UserCredentialsProvider(LOGIN, PASSWORD));
+        GetLoginResponse response = requester.login();
+        assertNotNull("email", response.email);
+        assertNotNull("name", response.name);
     }
 }
