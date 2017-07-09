@@ -3,7 +3,7 @@ package ru.ticketeen;
 import org.junit.Test;
 
 import ru.ticketeen.api.ApiHelper;
-import ru.ticketeen.api.response.GetReceiptsResponse;
+import ru.ticketeen.api.response.GetTicketResponse;
 import ru.ticketeen.util.UserCredentialsProvider;
 
 import static org.junit.Assert.assertNotNull;
@@ -22,7 +22,7 @@ public class FnsApiTest {
     @Test
     public void test() throws Exception {
         ApiHelper apiHelper = new ApiHelper(FNS_API_URL, new UserCredentialsProvider(LOGIN, PASSWORD));
-        GetReceiptsResponse receipts = apiHelper.getReceipts();
-        assertNotNull("Url to download", receipts.url);
+        GetTicketResponse tickets = apiHelper.getTickets();
+        assertNotNull("Url to download", tickets.url);
     }
 }

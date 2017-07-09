@@ -10,7 +10,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.ticketeen.api.response.GetReceiptsResponse;
+import ru.ticketeen.api.response.GetTicketResponse;
 import ru.ticketeen.api.util.BasicAuthInterceptor;
 import ru.ticketeen.api.util.IUserCredentialsProvider;
 
@@ -50,8 +50,8 @@ public class ApiHelper {
         instance = new ApiHelper(baseFnsApiUrl, userCredentialsProvider);
     }
 
-    public GetReceiptsResponse getReceipts() {
-        return makeRequest(api.getReceipts(0, FILE_TYPE_JSON));
+    public GetTicketResponse getTickets() {
+        return makeRequest(api.getTickets(0, FILE_TYPE_JSON));
     }
 
     private <T> T makeRequest(Call<T> httpCall) {
