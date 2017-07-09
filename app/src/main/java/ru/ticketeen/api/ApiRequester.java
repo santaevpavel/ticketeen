@@ -7,9 +7,9 @@ import ru.ticketeen.api.util.IUserCredentialsProvider;
 
 import static ru.ticketeen.api.FnsApi.FILE_TYPE_JSON;
 
-public class FnsApiRequester extends BaseApiRequester {
+public class ApiRequester extends BaseApiRequester {
 
-    public FnsApiRequester(String fnsApiBaseUrl, IUserCredentialsProvider userCredentialsProvider) {
+    public ApiRequester(String fnsApiBaseUrl, IUserCredentialsProvider userCredentialsProvider) {
         super(fnsApiBaseUrl, userCredentialsProvider);
     }
 

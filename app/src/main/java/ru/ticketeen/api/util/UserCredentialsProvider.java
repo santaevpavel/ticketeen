@@ -1,8 +1,7 @@
-package ru.ticketeen.util;
+package ru.ticketeen.api.util;
 
 
 import okhttp3.Credentials;
-import ru.ticketeen.api.util.IUserCredentialsProvider;
 
 public class UserCredentialsProvider implements IUserCredentialsProvider {
 

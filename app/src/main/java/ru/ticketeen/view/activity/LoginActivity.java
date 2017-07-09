@@ -11,10 +11,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Toast;
 
 import ru.ticketeen.R;
 import ru.ticketeen.databinding.ActivityLoginBinding;
 import ru.ticketeen.viewmodel.LoginViewModel;
+
+import static ru.ticketeen.util.FieldCheckerUtil.isPasswordValid;
+import static ru.ticketeen.util.FieldCheckerUtil.isPhoneValid;
 
 /**
  * A login screen that offers login via email/password.
@@ -47,6 +51,9 @@ public class LoginActivity extends LifecycleActivity {
 
     private void observeViewModel() {
         viewModel.getProgress().observe(this, this::showProgress);
+        viewModel.getLoginStatus().observe(this, status -> {
+            Toast.makeText(this, status + "", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void attemptLogin() {
@@ -62,7 +69,11 @@ public class LoginActivity extends LifecycleActivity {
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password)) {
+            binding.password.setError(getString(R.string.error_field_required));
+            focusView = binding.password;
+            cancel = true;
+        } else if (!isPasswordValid(password)) {
             binding.password.setError(getString(R.string.error_invalid_password));
             focusView = binding.password;
             cancel = true;
@@ -73,8 +84,8 @@ public class LoginActivity extends LifecycleActivity {
             binding.phone.setError(getString(R.string.error_field_required));
             focusView = binding.phone;
             cancel = true;
-        } else if (!isEmailValid(phone)) {
-            binding.phone.setError(getString(R.string.error_invalid_email));
+        } else if (!isPhoneValid(phone)) {
+            binding.phone.setError(getString(R.string.error_invalid_phone));
             focusView = binding.phone;
             cancel = true;
         }
@@ -91,16 +102,6 @@ public class LoginActivity extends LifecycleActivity {
             //mAuthTask.execute((Void) null);
             viewModel.login(phone, password);
         }
-    }
-
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
     }
 
     /**
