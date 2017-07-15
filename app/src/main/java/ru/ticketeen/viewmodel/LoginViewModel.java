@@ -13,14 +13,14 @@ import ru.ticketeen.util.RxUtil;
 
 public class LoginViewModel extends ViewModel {
 
-    private MutableLiveData<Boolean> progress;
-    private MutableLiveData<Boolean> loginStatus;
-
     @Inject
     LoginPasswordPreference loginPasswordPreference;
 
     @Inject
     ApiRequester apiRequester;
+
+    private MutableLiveData<Boolean> progress;
+    private MutableLiveData<Boolean> loginStatus;
 
     public LoginViewModel() {
         App.component().inject(this);

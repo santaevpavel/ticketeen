@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import ru.ticketeen.App;
+import ru.ticketeen.view.activity.LoginActivity;
 import ru.ticketeen.viewmodel.LoginViewModel;
 
 @Singleton
@@ -11,6 +12,8 @@ import ru.ticketeen.viewmodel.LoginViewModel;
 public interface DaggerGraphComponent {
 
     void inject(LoginViewModel viewModel);
+
+    void inject(LoginActivity loginActivity);
 
     final class Initializer {
         private Initializer() {

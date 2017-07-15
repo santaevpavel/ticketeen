@@ -13,8 +13,12 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
+import ru.ticketeen.App;
 import ru.ticketeen.R;
 import ru.ticketeen.databinding.ActivityLoginBinding;
+import ru.ticketeen.preference.LoginPasswordPreference;
 import ru.ticketeen.viewmodel.LoginViewModel;
 
 import static ru.ticketeen.util.FieldCheckerUtil.isPasswordValid;
@@ -25,12 +29,17 @@ import static ru.ticketeen.util.FieldCheckerUtil.isPhoneValid;
  */
 public class LoginActivity extends LifecycleActivity {
 
+    @Inject
+    LoginPasswordPreference loginPasswordPreference;
+
     private ActivityLoginBinding binding;
     private LoginViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        App.component().inject(this);
 
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 
@@ -52,7 +61,10 @@ public class LoginActivity extends LifecycleActivity {
     private void observeViewModel() {
         viewModel.getProgress().observe(this, this::showProgress);
         viewModel.getLoginStatus().observe(this, status -> {
-            Toast.makeText(this, status + "", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,
+                    status + " and login " + loginPasswordPreference.getLogin() +
+                            " and password " + loginPasswordPreference.getPassword(),
+                    Toast.LENGTH_SHORT).show();
         });
     }
 
