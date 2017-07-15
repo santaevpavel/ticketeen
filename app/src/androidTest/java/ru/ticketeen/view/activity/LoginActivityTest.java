@@ -35,10 +35,10 @@ public class LoginActivityTest extends BaseSleepTest {
                 .check(matches(isDisplayed()));
 
         onView(withId(R.id.phone))
-                .check(matches(allOf(withText(""), isDisplayed())));
+                .check(matches(isDisplayed()));
 
         onView(withId(R.id.password))
-                .check(matches(allOf(withText(""), isDisplayed())));
+                .check(matches(isDisplayed()));
 
         onView(withId(R.id.phone_sign_in_button))
                 .check(matches(allOf(withText("Войти"), isDisplayed())));
