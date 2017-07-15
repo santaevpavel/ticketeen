@@ -1,6 +1,7 @@
 package ru.ticketeen.di;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 import javax.inject.Singleton;
 
@@ -9,6 +10,7 @@ import dagger.Provides;
 import ru.ticketeen.api.ApiRequester;
 import ru.ticketeen.api.util.UserCredentialsProvider;
 import ru.ticketeen.preference.LoginPasswordPreference;
+import ru.ticketeen.preference.LoginPasswordPreferenceImpl;
 
 @Module
 public class MainModule {
@@ -26,30 +28,21 @@ public class MainModule {
 
     @Provides
     @Singleton
-    ApiRequester provideApiRequester() {
-        final LoginPasswordPreference preference = new LoginPasswordPreference() {
+    SharedPreferences provideSharedPreferences() {
+        final String APP_PREFS = "APP_PREFS";
+        return app.getApplicationContext().getSharedPreferences(APP_PREFS, 0);
+    }
 
-            @Override
-            public void setLogin() {
+    @Provides
+    @Singleton
+    LoginPasswordPreference provideLoginPasswordPreference(SharedPreferences sharedPreferences) {
+        return new LoginPasswordPreferenceImpl(sharedPreferences);
+    }
 
-            }
-
-            @Override
-            public void setPassword() {
-
-            }
-
-            @Override
-            public String getLogin() {
-                return "+79139066994";
-            }
-
-            @Override
-            public String getPassword() {
-                return "705697";
-            }
-        };
+    @Provides
+    @Singleton
+    ApiRequester provideApiRequester(LoginPasswordPreference loginPasswordPreference) {
         return new ApiRequester("http://proverkacheka.nalog.ru:8888",
-                new UserCredentialsProvider(preference));
+                new UserCredentialsProvider(loginPasswordPreference));
     }
 }

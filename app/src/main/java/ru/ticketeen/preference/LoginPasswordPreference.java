@@ -2,9 +2,10 @@ package ru.ticketeen.preference;
 
 
 public interface LoginPasswordPreference {
-    void setLogin();
 
-    void setPassword();
+    void setLogin(String login);
+
+    void setPassword(String password);
 
     String getLogin();
 
