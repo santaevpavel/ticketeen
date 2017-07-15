@@ -2,17 +2,18 @@ package ru.ticketeen.api.util;
 
 
 import okhttp3.Credentials;
+import ru.ticketeen.preference.LoginPasswordPreference;
 
 public class UserCredentialsProvider implements IUserCredentialsProvider {
 
-    private String credentials;
+    private LoginPasswordPreference preference;
 
-    public UserCredentialsProvider(String user, String password) {
-        credentials = Credentials.basic(user, password);
+    public UserCredentialsProvider(LoginPasswordPreference preference) {
+        this.preference = preference;
     }
 
     @Override
     public String getUserCredentials() {
-        return credentials;
+        return Credentials.basic(preference.getLogin(), preference.getPassword());
     }
 }
