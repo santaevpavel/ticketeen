@@ -42,7 +42,27 @@ public class MainModule {
     @Provides
     @Singleton
     ApiRequester provideApiRequester(LoginPasswordPreference loginPasswordPreference) {
+        /*return new ApiRequester("http://proverkacheka.nalog.ru:8888",
+                new UserCredentialsProvider(loginPasswordPreference));*/
         return new ApiRequester("http://proverkacheka.nalog.ru:8888",
-                new UserCredentialsProvider(loginPasswordPreference));
+                new UserCredentialsProvider(new LoginPasswordPreference() {
+                    @Override
+                    public String getLogin() {
+                        return "+79139066994";
+                    }
+
+                    @Override
+                    public void setLogin(String login) {
+                    }
+
+                    @Override
+                    public String getPassword() {
+                        return "705697";
+                    }
+
+                    @Override
+                    public void setPassword(String password) {
+                    }
+                }));
     }
 }
