@@ -27,7 +27,7 @@ import static org.hamcrest.Matchers.allOf;
 public class LoginActivityTest extends BaseSleepTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void mainActivityTest() {

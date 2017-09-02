@@ -6,6 +6,7 @@ import dagger.Component;
 import ru.ticketeen.App;
 import ru.ticketeen.view.activity.LoginActivity;
 import ru.ticketeen.viewmodel.LoginViewModel;
+import ru.ticketeen.viewmodel.TicketListViewModel;
 
 @Singleton
 @Component(modules = {MainModule.class})
@@ -14,6 +15,8 @@ public interface DaggerGraphComponent {
     void inject(LoginViewModel viewModel);
 
     void inject(LoginActivity loginActivity);
+
+    void inject(TicketListViewModel ticketListViewModel);
 
     final class Initializer {
         private Initializer() {
