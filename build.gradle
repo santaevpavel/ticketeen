@@ -37,5 +37,6 @@ ext {
     archRoomVersion = "1.0.0-alpha3"
 
     mockitoVersion = '1.10.19'
+    mockitoAndroidVersion = '2.9.0'
     architectureComponentsVersion = "1.0.0-alpha3"
 }

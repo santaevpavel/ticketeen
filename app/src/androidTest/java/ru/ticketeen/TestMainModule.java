@@ -3,8 +3,9 @@ package ru.ticketeen;
 import android.app.Application;
 import android.content.SharedPreferences;
 
+import org.mockito.Mockito;
+
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Singleton;
 
@@ -12,10 +13,11 @@ import dagger.Module;
 import dagger.Provides;
 import ru.ticketeen.api.ApiRequester;
 import ru.ticketeen.api.response.ExtractResponse;
-import ru.ticketeen.api.response.GetLoginResponse;
 import ru.ticketeen.api.response.TicketsResponse;
 import ru.ticketeen.preference.LoginPasswordPreference;
 import ru.ticketeen.preference.LoginPasswordPreferenceImpl;
+
+import static org.mockito.Mockito.when;
 
 @Module
 public class TestMainModule {
@@ -46,52 +48,19 @@ public class TestMainModule {
 
     @Provides
     @Singleton
-    ApiRequester provideApiRequester(LoginPasswordPreference loginPasswordPreference) {
-        return new ApiRequester() {
+    ApiRequester provideApiRequester() {
+        final ApiRequester mockApiRequester = Mockito.mock(ApiRequester.class);
+        when(mockApiRequester.getLinkToTickets())
+                .thenReturn(new ExtractResponse("mockUrl"));
 
-            @Override
-            public ExtractResponse getLinkToTickets() {
-                final ExtractResponse extractResponse = new ExtractResponse();
-                extractResponse.url = "mockUrl";
-                return extractResponse;
-            }
+        final ArrayList<TicketsResponse> ticketsResponses = new ArrayList<>();
+        final TicketsResponse.Receipt receipt = new TicketsResponse.Receipt();
+        receipt.dateTime = "mockDateTime";
+        ticketsResponses.add(new TicketsResponse(new TicketsResponse.Document(receipt)));
 
-            @Override
-            public List<TicketsResponse> getTickets(String url) {
-                final ArrayList<TicketsResponse> ticketsResponses = new ArrayList<>();
-                final TicketsResponse ticketsResponse = new TicketsResponse();
-                ticketsResponse.document = new TicketsResponse.Document();
-                ticketsResponse.document.receipt = new TicketsResponse.Receipt();
-                ticketsResponse.document.receipt.dateTime = "mockDateTime";
-                ticketsResponses.add(ticketsResponse);
-                return ticketsResponses;
-            }
+        when(mockApiRequester.getTickets(Mockito.anyString()))
+                .thenReturn(ticketsResponses);
 
-            @Override
-            public GetLoginResponse login() {
-                return null;
-            }
-        };
-
-        /*new ApiRequesterImpl("http://proverkacheka.nalog.ru:8888",
-                new UserCredentialsProvider(new LoginPasswordPreference() {
-                    @Override
-                    public String getLogin() {
-                        return "+79139066994";
-                    }
-
-                    @Override
-                    public void setLogin(String login) {
-                    }
-
-                    @Override
-                    public String getPassword() {
-                        return "705697";
-                    }
-
-                    @Override
-                    public void setPassword(String password) {
-                    }
-                }));*/
+        return mockApiRequester;
     }
 }

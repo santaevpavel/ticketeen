@@ -10,10 +10,18 @@ public class TicketsResponse {
     @SerializedName("document")
     public Document document;
 
+    public TicketsResponse(Document document) {
+        this.document = document;
+    }
+
     public static class Document {
 
         @SerializedName("receipt")
         public Receipt receipt;
+
+        public Document(Receipt receipt) {
+            this.receipt = receipt;
+        }
     }
 
     public static class Receipt {
