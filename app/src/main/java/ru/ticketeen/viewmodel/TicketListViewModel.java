@@ -15,15 +15,11 @@ import ru.ticketeen.App;
 import ru.ticketeen.api.ApiRequester;
 import ru.ticketeen.api.response.ExtractResponse;
 import ru.ticketeen.api.response.TicketsResponse;
-import ru.ticketeen.preference.LoginPasswordPreference;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class TicketListViewModel extends ViewModel {
-
-    @Inject
-    LoginPasswordPreference loginPasswordPreference;
 
     @Inject
     ApiRequester apiRequester;

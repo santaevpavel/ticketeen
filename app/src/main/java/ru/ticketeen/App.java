@@ -28,10 +28,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        buildComponentGraph();
+        graph = buildComponentGraph();
     }
 
-    private void buildComponentGraph() {
-        graph = DaggerGraphComponent.Initializer.init(instance);
+    protected DaggerGraphComponent buildComponentGraph() {
+        return DaggerGraphComponent.Initializer.init(this);
     }
 }
