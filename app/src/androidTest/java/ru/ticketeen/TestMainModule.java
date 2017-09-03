@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.ticketeen.api.ApiRequester;
+import ru.ticketeen.api.ApiRequesterImpl;
 import ru.ticketeen.api.util.UserCredentialsProvider;
 import ru.ticketeen.preference.LoginPasswordPreference;
 import ru.ticketeen.preference.LoginPasswordPreferenceImpl;
@@ -41,10 +41,10 @@ public class TestMainModule {
 
     @Provides
     @Singleton
-    ApiRequester provideApiRequester(LoginPasswordPreference loginPasswordPreference) {
-        /*return new ApiRequester("http://proverkacheka.nalog.ru:8888",
+    ApiRequesterImpl provideApiRequester(LoginPasswordPreference loginPasswordPreference) {
+        /*return new ApiRequesterImpl("http://proverkacheka.nalog.ru:8888",
                 new UserCredentialsProvider(loginPasswordPreference));*/
-        return new ApiRequester("http://proverkacheka.nalog.ru:8888",
+        return new ApiRequesterImpl("http://proverkacheka.nalog.ru:8888",
                 new UserCredentialsProvider(new LoginPasswordPreference() {
                     @Override
                     public String getLogin() {

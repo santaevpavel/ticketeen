@@ -8,7 +8,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 
-import ru.ticketeen.api.ApiRequester;
+import ru.ticketeen.api.ApiRequesterImpl;
 import ru.ticketeen.api.response.ExtractResponse;
 import ru.ticketeen.api.response.GetLoginResponse;
 import ru.ticketeen.api.response.TicketsResponse;
@@ -33,14 +33,14 @@ public class FnsApiTest {
 
     @Test
     public void extractLinkToTickets() throws Exception {
-        ApiRequester requester = new ApiRequester(FNS_API_URL, provider);
+        ApiRequesterImpl requester = new ApiRequesterImpl(FNS_API_URL, provider);
         ExtractResponse linkToTickets = requester.getLinkToTickets();
         assertNotNull("Url to download", linkToTickets.url);
     }
 
     @Test
     public void extractTickets() throws Exception {
-        ApiRequester requester = new ApiRequester(FNS_API_URL, provider);
+        ApiRequesterImpl requester = new ApiRequesterImpl(FNS_API_URL, provider);
         ExtractResponse linkToTickets = requester.getLinkToTickets();
         assertNotNull("Url to download", linkToTickets.url);
 
@@ -50,7 +50,7 @@ public class FnsApiTest {
 
     @Test
     public void login() throws Exception {
-        ApiRequester requester = new ApiRequester(FNS_API_URL, provider);
+        ApiRequesterImpl requester = new ApiRequesterImpl(FNS_API_URL, provider);
         GetLoginResponse response = requester.login();
         assertNotNull("email", response.email);
         assertNotNull("name", response.name);
