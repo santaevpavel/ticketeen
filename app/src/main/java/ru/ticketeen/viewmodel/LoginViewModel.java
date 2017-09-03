@@ -7,7 +7,7 @@ import android.arch.lifecycle.ViewModel;
 import javax.inject.Inject;
 
 import ru.ticketeen.App;
-import ru.ticketeen.api.ApiRequesterImpl;
+import ru.ticketeen.api.ApiRequester;
 import ru.ticketeen.preference.LoginPasswordPreference;
 import ru.ticketeen.util.RxUtil;
 
@@ -17,7 +17,7 @@ public class LoginViewModel extends ViewModel {
     LoginPasswordPreference loginPasswordPreference;
 
     @Inject
-    ApiRequesterImpl apiRequester;
+    ApiRequester apiRequester;
 
     private MutableLiveData<Boolean> progress;
     private MutableLiveData<Boolean> loginStatus;

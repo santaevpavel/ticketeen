@@ -7,7 +7,7 @@ import ru.ticketeen.api.response.ExtractResponse;
 import ru.ticketeen.api.response.GetLoginResponse;
 import ru.ticketeen.api.response.TicketsResponse;
 
-interface ApiRequester {
+public interface ApiRequester {
     ExtractResponse getLinkToTickets();
 
     List<TicketsResponse> getTickets(String url);

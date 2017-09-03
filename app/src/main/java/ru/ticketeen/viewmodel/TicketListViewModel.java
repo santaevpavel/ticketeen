@@ -12,7 +12,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ru.ticketeen.App;
-import ru.ticketeen.api.ApiRequesterImpl;
+import ru.ticketeen.api.ApiRequester;
 import ru.ticketeen.api.response.ExtractResponse;
 import ru.ticketeen.api.response.TicketsResponse;
 import rx.Observable;
@@ -22,7 +22,7 @@ import rx.schedulers.Schedulers;
 public class TicketListViewModel extends ViewModel {
 
     @Inject
-    ApiRequesterImpl apiRequester;
+    ApiRequester apiRequester;
 
     private MutableLiveData<List<TicketsResponse.Document>> tickets;
 
