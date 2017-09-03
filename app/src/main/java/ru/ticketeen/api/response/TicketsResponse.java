@@ -10,13 +10,13 @@ public class TicketsResponse {
     @SerializedName("document")
     public Document document;
 
-    public class Document {
+    public static class Document {
 
         @SerializedName("receipt")
         public Receipt receipt;
     }
 
-    public class Receipt {
+    public static class Receipt {
 
         @SerializedName("ecashTotalSum")
         public Integer ecashTotalSum;
@@ -77,7 +77,7 @@ public class TicketsResponse {
 
     }
 
-    public class Item {
+    public static class Item {
 
         @SerializedName("nds18")
         public Integer nds18;

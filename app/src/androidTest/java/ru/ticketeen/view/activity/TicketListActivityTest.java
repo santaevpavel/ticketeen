@@ -17,7 +17,6 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertTrue;
 
 @LargeTest
@@ -29,7 +28,6 @@ public class TicketListActivityTest extends BaseSleepTest {
 
     @Test
     public void ticketListActivityTest() throws InterruptedException {
-        sleep(5000);
         onView(withId(R.id.list))
                 .check(matches(isDisplayed()));
 

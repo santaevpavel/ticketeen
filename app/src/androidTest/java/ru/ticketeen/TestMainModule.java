@@ -3,13 +3,17 @@ package ru.ticketeen;
 import android.app.Application;
 import android.content.SharedPreferences;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import ru.ticketeen.api.ApiRequester;
-import ru.ticketeen.api.ApiRequesterImpl;
-import ru.ticketeen.api.util.UserCredentialsProvider;
+import ru.ticketeen.api.response.ExtractResponse;
+import ru.ticketeen.api.response.GetLoginResponse;
+import ru.ticketeen.api.response.TicketsResponse;
 import ru.ticketeen.preference.LoginPasswordPreference;
 import ru.ticketeen.preference.LoginPasswordPreferenceImpl;
 
@@ -43,9 +47,33 @@ public class TestMainModule {
     @Provides
     @Singleton
     ApiRequester provideApiRequester(LoginPasswordPreference loginPasswordPreference) {
-        /*return new ApiRequesterImpl("http://proverkacheka.nalog.ru:8888",
-                new UserCredentialsProvider(loginPasswordPreference));*/
-        return new ApiRequesterImpl("http://proverkacheka.nalog.ru:8888",
+        return new ApiRequester() {
+
+            @Override
+            public ExtractResponse getLinkToTickets() {
+                final ExtractResponse extractResponse = new ExtractResponse();
+                extractResponse.url = "mockUrl";
+                return extractResponse;
+            }
+
+            @Override
+            public List<TicketsResponse> getTickets(String url) {
+                final ArrayList<TicketsResponse> ticketsResponses = new ArrayList<>();
+                final TicketsResponse ticketsResponse = new TicketsResponse();
+                ticketsResponse.document = new TicketsResponse.Document();
+                ticketsResponse.document.receipt = new TicketsResponse.Receipt();
+                ticketsResponse.document.receipt.dateTime = "mockDateTime";
+                ticketsResponses.add(ticketsResponse);
+                return ticketsResponses;
+            }
+
+            @Override
+            public GetLoginResponse login() {
+                return null;
+            }
+        };
+
+        /*new ApiRequesterImpl("http://proverkacheka.nalog.ru:8888",
                 new UserCredentialsProvider(new LoginPasswordPreference() {
                     @Override
                     public String getLogin() {
@@ -64,6 +92,6 @@ public class TestMainModule {
                     @Override
                     public void setPassword(String password) {
                     }
-                }));
+                }));*/
     }
 }
