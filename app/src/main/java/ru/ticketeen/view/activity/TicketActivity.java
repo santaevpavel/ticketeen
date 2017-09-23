@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 
 import ru.ticketeen.R;
 import ru.ticketeen.api.response.TicketsResponse;
 import ru.ticketeen.databinding.ActivityTicketBinding;
+import ru.ticketeen.view.adapter.TicketItemRecyclerViewAdapter;
 
 public class TicketActivity extends AppCompatActivity {
 
@@ -28,11 +30,14 @@ public class TicketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_ticket);
 
+        binding.list.setLayoutManager(new LinearLayoutManager(this));
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null && bundle.containsKey(KEY_TICKET)) {
             ticket = (TicketsResponse.Document) bundle.getSerializable(KEY_TICKET);
 
-            binding.text.setText(ticket.receipt.user);
+
+            binding.list.setAdapter(new TicketItemRecyclerViewAdapter(ticket.receipt.items));
         }
 
     }
