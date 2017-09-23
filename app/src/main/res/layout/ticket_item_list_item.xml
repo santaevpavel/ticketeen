@@ -12,10 +12,11 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -27,10 +28,11 @@
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/market_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textColor="#111"
                 android:text="@{item.name}"/>
 
         </LinearLayout>
@@ -44,6 +46,12 @@
             android:layout_marginRight="16dp"
             android:maxLines="1"
             android:text="@{String.format(`%.2f руб.`, item.price / 100.0)}"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#4000"
+            android:layout_alignBottom="@+id/layout"/>
 
     </RelativeLayout>
 </layout>
