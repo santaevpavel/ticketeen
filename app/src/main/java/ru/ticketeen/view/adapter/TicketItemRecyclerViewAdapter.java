@@ -14,7 +14,6 @@ import ru.ticketeen.databinding.TicketItemListItemBinding;
 public class TicketItemRecyclerViewAdapter extends RecyclerView.Adapter<TicketItemRecyclerViewAdapter.ViewHolder> {
 
     private List<TicketsResponse.Item> data;
-    private OnClickTicketListener listener;
 
     public TicketItemRecyclerViewAdapter(List<TicketsResponse.Item> data) {
         this.data = data;
@@ -22,10 +21,6 @@ public class TicketItemRecyclerViewAdapter extends RecyclerView.Adapter<TicketIt
 
     public void setData(List<TicketsResponse.Item> data) {
         this.data = data;
-    }
-
-    public void setListener(OnClickTicketListener listener) {
-        this.listener = listener;
     }
 
     @Override
@@ -41,22 +36,11 @@ public class TicketItemRecyclerViewAdapter extends RecyclerView.Adapter<TicketIt
     public void onBindViewHolder(ViewHolder holder, int position) {
         final TicketsResponse.Item receiptItem = data.get(position);
         holder.binding.setItem(receiptItem);
-
-        holder.binding.getRoot().setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onClick(receiptItem);
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
         return data != null ? data.size() : 0;
-    }
-
-    public interface OnClickTicketListener {
-
-        void onClick(TicketsResponse.Item item);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".view.activity.TicketActivity">
         </activity>
+        <activity android:name=".view.activity.SearchActivity">
+        </activity>
     </application>
 
 </manifest>

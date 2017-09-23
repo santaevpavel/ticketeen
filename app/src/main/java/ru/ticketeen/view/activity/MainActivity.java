@@ -14,6 +14,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        startActivity(new Intent(getApplicationContext(), TicketListActivity.class));
+        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
     }
 }
