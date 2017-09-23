@@ -3,6 +3,7 @@ package ru.ticketeen.api.response;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class TicketsResponse {
@@ -14,7 +15,7 @@ public class TicketsResponse {
         this.document = document;
     }
 
-    public static class Document {
+    public static class Document implements Serializable {
 
         @SerializedName("receipt")
         public Receipt receipt;
@@ -24,7 +25,7 @@ public class TicketsResponse {
         }
     }
 
-    public static class Receipt {
+    public static class Receipt implements Serializable {
 
         @SerializedName("ecashTotalSum")
         public Long ecashTotalSum;
@@ -85,7 +86,7 @@ public class TicketsResponse {
 
     }
 
-    public static class Item {
+    public static class Item implements Serializable {
 
         @SerializedName("nds18")
         public Long nds18;

@@ -23,6 +23,8 @@
             android:label="@string/title_activity_login"/>
         <activity android:name=".view.activity.TicketListActivity">
         </activity>
+        <activity android:name=".view.activity.TicketActivity">
+        </activity>
     </application>
 
 </manifest>

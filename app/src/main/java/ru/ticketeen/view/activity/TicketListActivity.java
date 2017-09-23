@@ -33,6 +33,10 @@ public class TicketListActivity extends LifecycleActivity {
             adapter.setData(documents);
             adapter.notifyDataSetChanged();
         });
+
+        adapter.setListener(document -> {
+            startActivity(TicketActivity.getIntent(this, document));
+        });
     }
 
 }
