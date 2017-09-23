@@ -27,10 +27,10 @@ public class TicketsResponse {
     public static class Receipt {
 
         @SerializedName("ecashTotalSum")
-        public Integer ecashTotalSum;
+        public Long ecashTotalSum;
 
         @SerializedName("fiscalSign")
-        public Integer fiscalSign;
+        public Long fiscalSign;
 
         @SerializedName("fiscalDriveNumber")
         public String fiscalDriveNumber;
@@ -39,31 +39,31 @@ public class TicketsResponse {
         public List<Item> items = null;
 
         @SerializedName("operationType")
-        public Integer operationType;
+        public Long operationType;
 
         @SerializedName("nds10")
-        public Integer nds10;
+        public Long nds10;
 
         @SerializedName("taxationType")
-        public Integer taxationType;
+        public Long taxationType;
 
         @SerializedName("totalSum")
-        public Integer totalSum;
+        public Long totalSum;
 
         @SerializedName("fiscalDocumentNumber")
-        public Integer fiscalDocumentNumber;
+        public Long fiscalDocumentNumber;
 
         @SerializedName("receiptCode")
-        public Integer receiptCode;
+        public Long receiptCode;
 
         @SerializedName("userInn")
         public String userInn;
 
         @SerializedName("cashTotalSum")
-        public Integer cashTotalSum;
+        public Long cashTotalSum;
 
         @SerializedName("requestNumber")
-        public Integer requestNumber;
+        public Long requestNumber;
 
         @SerializedName("dateTime")
         public String dateTime;
@@ -72,13 +72,13 @@ public class TicketsResponse {
         public String operator;
 
         @SerializedName("nds18")
-        public Integer nds18;
+        public Long nds18;
 
         @SerializedName("user")
         public String user;
 
         @SerializedName("shiftNumber")
-        public Integer shiftNumber;
+        public Long shiftNumber;
 
         @SerializedName("kktRegId")
         public String kktRegId;
@@ -88,10 +88,10 @@ public class TicketsResponse {
     public static class Item {
 
         @SerializedName("nds18")
-        public Integer nds18;
+        public Long nds18;
 
         @SerializedName("price")
-        public Integer price;
+        public Long price;
 
         @SerializedName("name")
         public String name;
@@ -100,10 +100,10 @@ public class TicketsResponse {
         public Double quantity;
 
         @SerializedName("sum")
-        public Integer sum;
+        public Long sum;
 
         @SerializedName("nds10")
-        public Integer nds10;
+        public Long nds10;
 
     }
 }
