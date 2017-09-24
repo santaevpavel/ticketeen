@@ -37,7 +37,7 @@ public class TicketActivity extends AppCompatActivity {
             ticket = (TicketsResponse.Document) bundle.getSerializable(KEY_TICKET);
 
 
-            binding.list.setAdapter(new TicketItemRecyclerViewAdapter(ticket.receipt.items));
+            binding.list.setAdapter(new TicketItemRecyclerViewAdapter(null));
         }
 
     }

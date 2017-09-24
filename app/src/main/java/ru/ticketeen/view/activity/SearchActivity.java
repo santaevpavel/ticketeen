@@ -23,6 +23,7 @@ import ru.ticketeen.api.response.TicketsResponse;
 import ru.ticketeen.databinding.ActivitySearchBinding;
 import ru.ticketeen.preference.LoginPasswordPreference;
 import ru.ticketeen.view.adapter.TicketItemRecyclerViewAdapter;
+import ru.ticketeen.view.adapter.model.SearchItem;
 import ru.ticketeen.viewmodel.TicketListViewModel;
 
 import static ru.ticketeen.preference.LoginPasswordPreference.EMPTY;
@@ -66,7 +67,7 @@ public class SearchActivity extends LifecycleActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 final String query = binding.searchInput.getText().toString();
-                final List<TicketsResponse.Item> foundItems = findItemsByQuery(query);
+                final List<SearchItem> foundItems = findItemsByQuery(query);
                 adapter.setData(foundItems);
                 adapter.notifyDataSetChanged();
             }
@@ -101,19 +102,31 @@ public class SearchActivity extends LifecycleActivity {
         finish();
     }
 
-    private List<TicketsResponse.Item> findItemsByQuery(String query) {
-        List<TicketsResponse.Item> foundItems = new ArrayList<>();
+    private List<SearchItem> findItemsByQuery(String query) {
+        List<SearchItem> foundItems = new ArrayList<>();
         if (documents != null) {
             for (TicketsResponse.Document document : documents) {
                 final List<TicketsResponse.Item> items = document.receipt.items;
                 for (TicketsResponse.Item item : items) {
                     if (item.name.toLowerCase().contains(query.toLowerCase())) {
-                        foundItems.add(item);
+                        foundItems.add(toSearchItem(item, document.receipt));
                     }
                 }
             }
             return foundItems;
         }
         return foundItems;
+    }
+
+    private SearchItem toSearchItem(TicketsResponse.Item item, TicketsResponse.Receipt receipt) {
+        final SearchItem searchItem = new SearchItem();
+        searchItem.setName(item.name.trim().replaceAll("\\s+", " "));
+        searchItem.setQuantity(item.quantity);
+        searchItem.setPrice(item.price / 100.0);
+        searchItem.setSum(item.sum / 100.0);
+        searchItem.setWeightedGood((item.quantity % 1) != 0);
+        searchItem.setMarket(receipt.user.trim().replaceAll("\\s+", " "));
+        searchItem.setDateTime(receipt.dateTime);
+        return searchItem;
     }
 }

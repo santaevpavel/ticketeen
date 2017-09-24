@@ -8,18 +8,18 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import ru.ticketeen.R;
-import ru.ticketeen.api.response.TicketsResponse;
 import ru.ticketeen.databinding.TicketItemListItemBinding;
+import ru.ticketeen.view.adapter.model.SearchItem;
 
 public class TicketItemRecyclerViewAdapter extends RecyclerView.Adapter<TicketItemRecyclerViewAdapter.ViewHolder> {
 
-    private List<TicketsResponse.Item> data;
+    private List<SearchItem> data;
 
-    public TicketItemRecyclerViewAdapter(List<TicketsResponse.Item> data) {
+    public TicketItemRecyclerViewAdapter(List<SearchItem> data) {
         this.data = data;
     }
 
-    public void setData(List<TicketsResponse.Item> data) {
+    public void setData(List<SearchItem> data) {
         this.data = data;
     }
 
@@ -34,7 +34,7 @@ public class TicketItemRecyclerViewAdapter extends RecyclerView.Adapter<TicketIt
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final TicketsResponse.Item receiptItem = data.get(position);
+        final SearchItem receiptItem = data.get(position);
         holder.binding.setItem(receiptItem);
     }
 
