@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#555"
                 android:textSize="12sp"
+                android:maxLines="1"
                 android:text="@{item.market}"/>
 
         </LinearLayout>

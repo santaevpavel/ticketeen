@@ -120,13 +120,17 @@ public class SearchActivity extends LifecycleActivity {
 
     private SearchItem toSearchItem(TicketsResponse.Item item, TicketsResponse.Receipt receipt) {
         final SearchItem searchItem = new SearchItem();
-        searchItem.setName(item.name.trim().replaceAll("\\s+", " "));
+        searchItem.setName(wrap(item.name).trim().replaceAll("\\s+", " "));
         searchItem.setQuantity(item.quantity);
         searchItem.setPrice(item.price / 100.0);
         searchItem.setSum(item.sum / 100.0);
         searchItem.setWeightedGood((item.quantity % 1) != 0);
-        searchItem.setMarket(receipt.user.trim().replaceAll("\\s+", " "));
+        searchItem.setMarket(wrap(receipt.user).trim().replaceAll("\\s+", " "));
         searchItem.setDateTime(receipt.dateTime);
         return searchItem;
+    }
+
+    private static String wrap(String str) {
+        return str != null ? str : "Н/д";
     }
 }
