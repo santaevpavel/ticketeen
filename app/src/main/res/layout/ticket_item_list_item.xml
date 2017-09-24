@@ -14,7 +14,7 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
-                    android:layout_height="64dp"
+                    android:layout_height="70dp"
                     android:orientation="vertical">
 
         <LinearLayout
@@ -32,7 +32,7 @@
                 android:id="@+id/item_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#111"
+                android:textColor="#000"
                 android:maxLines="2"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -45,7 +45,17 @@
                 android:textColor="#555"
                 android:textSize="12sp"
                 android:maxLines="1"
+                android:ellipsize="end"
                 android:text="@{item.market}"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/date_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#777"
+                android:textSize="10sp"
+                android:maxLines="1"
+                android:text="@{item.dateTime.replace(`T`, ` `)}"/>
 
         </LinearLayout>
 
