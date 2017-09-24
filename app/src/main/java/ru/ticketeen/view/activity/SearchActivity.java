@@ -109,13 +109,20 @@ public class SearchActivity extends LifecycleActivity {
                 final List<TicketsResponse.Item> items = document.receipt.items;
                 for (TicketsResponse.Item item : items) {
                     if (item.name.toLowerCase().contains(query.toLowerCase())) {
-                        foundItems.add(toSearchItem(item, document.receipt));
+                        addUniqueItem(foundItems, document, item);
                     }
                 }
             }
             return foundItems;
         }
         return foundItems;
+    }
+
+    private void addUniqueItem(List<SearchItem> foundItems, TicketsResponse.Document document, TicketsResponse.Item item) {
+        final SearchItem foundItem = toSearchItem(item, document.receipt);
+        if (!foundItems.contains(foundItem)) {
+            foundItems.add(foundItem);
+        }
     }
 
     private SearchItem toSearchItem(TicketsResponse.Item item, TicketsResponse.Receipt receipt) {

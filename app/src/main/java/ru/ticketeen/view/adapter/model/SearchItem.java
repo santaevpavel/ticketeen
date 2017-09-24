@@ -15,6 +15,35 @@ public class SearchItem {
     public SearchItem() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SearchItem that = (SearchItem) o;
+
+        if (isWeightedGood != that.isWeightedGood) return false;
+        if (!name.equals(that.name)) return false;
+        if (!price.equals(that.price)) return false;
+        if (sum != null ? !sum.equals(that.sum) : that.sum != null) return false;
+        if (!quantity.equals(that.quantity)) return false;
+        if (market != null ? !market.equals(that.market) : that.market != null) return false;
+        return dateTime.equals(that.dateTime);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + price.hashCode();
+        result = 31 * result + (sum != null ? sum.hashCode() : 0);
+        result = 31 * result + quantity.hashCode();
+        result = 31 * result + (isWeightedGood ? 1 : 0);
+        result = 31 * result + (market != null ? market.hashCode() : 0);
+        result = 31 * result + dateTime.hashCode();
+        return result;
+    }
+
     public boolean isWeightedGood() {
         return isWeightedGood;
     }
