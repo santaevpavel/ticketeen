@@ -62,14 +62,18 @@ public class LoginActivity extends LifecycleActivity {
     private void observeViewModel() {
         viewModel.getProgress().observe(this, this::showProgress);
         viewModel.getLoginStatus().observe(this, status -> {
-            if (status != null && status) {
-                Toast.makeText(this,
-                        status + " and login " + loginPasswordPreference.getLogin() +
-                                " and password " + loginPasswordPreference.getPassword(),
-                        Toast.LENGTH_SHORT).show();
-
-                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                finish();
+            switch (status) {
+                case ERROR:
+                    Toast.makeText(this, "Ошибка", Toast.LENGTH_SHORT).show();
+                    break;
+                case SUCCESS:
+                    Toast.makeText(this,
+                            status + " and login " + loginPasswordPreference.getLogin() +
+                                    " and password " + loginPasswordPreference.getPassword(),
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                    finish();
+                    break;
             }
         });
     }
