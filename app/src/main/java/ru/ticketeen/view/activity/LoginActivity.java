@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.arch.lifecycle.LifecycleActivity;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
@@ -61,10 +62,15 @@ public class LoginActivity extends LifecycleActivity {
     private void observeViewModel() {
         viewModel.getProgress().observe(this, this::showProgress);
         viewModel.getLoginStatus().observe(this, status -> {
-            Toast.makeText(this,
-                    status + " and login " + loginPasswordPreference.getLogin() +
-                            " and password " + loginPasswordPreference.getPassword(),
-                    Toast.LENGTH_SHORT).show();
+            if (status != null && status) {
+                Toast.makeText(this,
+                        status + " and login " + loginPasswordPreference.getLogin() +
+                                " and password " + loginPasswordPreference.getPassword(),
+                        Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                finish();
+            }
         });
     }
 

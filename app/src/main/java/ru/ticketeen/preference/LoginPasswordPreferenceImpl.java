@@ -2,6 +2,7 @@ package ru.ticketeen.preference;
 
 
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 public class LoginPasswordPreferenceImpl implements LoginPasswordPreference {
 
@@ -12,6 +13,11 @@ public class LoginPasswordPreferenceImpl implements LoginPasswordPreference {
 
     public LoginPasswordPreferenceImpl(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
+    }
+
+    @Override
+    public boolean isLoggedIn() {
+        return !TextUtils.isEmpty(getLogin()) && !TextUtils.isEmpty(getPassword());
     }
 
     @Override
