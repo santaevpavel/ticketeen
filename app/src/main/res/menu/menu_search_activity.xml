@@ -2,11 +2,10 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/action_logout"
         android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="200"
-        android:title="Поиск"
-        android:actionViewClass="android.widget.SearchView"
+        android:title="Logout"
         app:showAsAction="always"/>
 
 </menu>

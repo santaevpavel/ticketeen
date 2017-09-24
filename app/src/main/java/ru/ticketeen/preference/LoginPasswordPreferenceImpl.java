@@ -45,6 +45,6 @@ public class LoginPasswordPreferenceImpl implements LoginPasswordPreference {
     }
 
     private String getString(String key) {
-        return sharedPreferences.getString(key, "");
+        return sharedPreferences.getString(key, EMPTY);
     }
 }

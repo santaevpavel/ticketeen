@@ -6,6 +6,7 @@ import dagger.Component;
 import ru.ticketeen.App;
 import ru.ticketeen.view.activity.LoginActivity;
 import ru.ticketeen.view.activity.MainActivity;
+import ru.ticketeen.view.activity.SearchActivity;
 import ru.ticketeen.viewmodel.LoginViewModel;
 import ru.ticketeen.viewmodel.TicketListViewModel;
 
@@ -20,6 +21,8 @@ public interface DaggerGraphComponent {
     void inject(TicketListViewModel ticketListViewModel);
 
     void inject(MainActivity mainActivity);
+
+    void inject(SearchActivity searchActivity);
 
     final class Initializer {
         private Initializer() {

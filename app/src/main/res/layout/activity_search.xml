@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context="ru.ticketeen.view.activity.TicketListActivity">
+
+        <Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="81dp"/>
 
         <EditText
             android:id="@+id/search_input"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_input"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </layout>

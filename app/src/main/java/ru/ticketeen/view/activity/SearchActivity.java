@@ -2,21 +2,30 @@ package ru.ticketeen.view.activity;
 
 import android.arch.lifecycle.LifecycleActivity;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import ru.ticketeen.App;
 import ru.ticketeen.R;
 import ru.ticketeen.api.response.TicketsResponse;
 import ru.ticketeen.databinding.ActivitySearchBinding;
+import ru.ticketeen.preference.LoginPasswordPreference;
 import ru.ticketeen.view.adapter.TicketItemRecyclerViewAdapter;
 import ru.ticketeen.viewmodel.TicketListViewModel;
+
+import static ru.ticketeen.preference.LoginPasswordPreference.EMPTY;
 
 public class SearchActivity extends LifecycleActivity {
 
@@ -25,13 +34,19 @@ public class SearchActivity extends LifecycleActivity {
     private TicketItemRecyclerViewAdapter adapter;
     private List<TicketsResponse.Document> documents;
 
+    @Inject
+    LoginPasswordPreference loginPasswordPreference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.component().inject(this);
 
         viewModel = ViewModelProviders.of(this).get(TicketListViewModel.class);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
+
+        setActionBar(binding.toolbar);
 
         adapter = new TicketItemRecyclerViewAdapter(Collections.EMPTY_LIST);
         binding.list.setLayoutManager(new LinearLayoutManager(this));
@@ -61,6 +76,29 @@ public class SearchActivity extends LifecycleActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                logout();
+                return true;
+        }
+        return false;
+    }
+
+    private void logout() {
+        loginPasswordPreference.setLogin(EMPTY);
+        loginPasswordPreference.setPassword(EMPTY);
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 
     private List<TicketsResponse.Item> findItemsByQuery(String query) {
