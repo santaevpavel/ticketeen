@@ -15,19 +15,17 @@
         <activity android:name=".view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".view.activity.LoginActivity"
             android:label="@string/title_activity_login"/>
-        <activity android:name=".view.activity.TicketListActivity">
-        </activity>
-        <activity android:name=".view.activity.TicketActivity">
-        </activity>
-        <activity android:name=".view.activity.SearchActivity">
-        </activity>
+        <activity android:name=".view.activity.TicketListActivity"/>
+        <activity android:name=".view.activity.TicketActivity"/>
+        <activity
+            android:name=".view.activity.SearchActivity"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>
