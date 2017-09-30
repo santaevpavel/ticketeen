@@ -43,9 +43,6 @@ public class LoginActivityTest extends BaseSleepTest {
         onView(withId(R.id.phone_sign_in_button))
                 .check(matches(allOf(withText("Войти"), isDisplayed())));
 
-        onView(withId(R.id.to_sign_up_button))
-                .check(matches(allOf(withText("Регистрация"), isDisplayed())));
-
         onView(withId(R.id.phone))
                 .perform(scrollTo(), replaceText("+79139066994"), closeSoftKeyboard());
 
