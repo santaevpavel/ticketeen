@@ -8,8 +8,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
+import android.view.ContextMenu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,8 +48,6 @@ public class SearchActivity extends LifecycleActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
 
-        setActionBar(binding.toolbar);
-
         adapter = new TicketItemRecyclerViewAdapter(Collections.EMPTY_LIST);
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(adapter);
@@ -59,14 +58,14 @@ public class SearchActivity extends LifecycleActivity {
             adapter.notifyDataSetChanged();
         });
 
-        binding.searchInput.addTextChangedListener(new TextWatcher() {
+        binding.editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                final String query = binding.searchInput.getText().toString();
+                final String query = binding.editTextSearch.getText().toString();
                 final List<SearchItem> foundItems = findItemsByQuery(query);
                 adapter.setData(foundItems);
                 adapter.notifyDataSetChanged();
@@ -77,22 +76,25 @@ public class SearchActivity extends LifecycleActivity {
 
             }
         });
+
+        binding.menuOptions.setOnClickListener(this::openContextMenu);
+        registerForContextMenu(binding.menuOptions);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.menu_search_activity, menu);
-        return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_logout:
                 logout();
                 return true;
         }
-        return false;
+        return super.onContextItemSelected(item);
     }
 
     private void logout() {

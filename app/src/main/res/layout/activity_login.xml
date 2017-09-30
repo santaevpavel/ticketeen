@@ -41,7 +41,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_phone"
-                        android:text="+79139066994"
                         android:inputType="phone"
                         android:maxLines="1" />
 
@@ -56,7 +55,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
-                        android:text="705697"
                         android:imeActionId="@+id/login"
                         android:imeActionLabel="@string/action_sign_in_short"
                         android:imeOptions="actionUnspecified"
@@ -65,22 +63,13 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <Button
+                <android.support.v7.widget.AppCompatButton
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:id="@+id/phone_sign_in_button"
-                    style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/action_sign_in"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/to_sign_up_button"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/action_sign_up"
                     android:textStyle="bold" />
 
             </LinearLayout>

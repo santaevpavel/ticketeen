@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -8,19 +9,74 @@
         android:orientation="vertical"
         tools:context="ru.ticketeen.view.activity.TicketListActivity">
 
-        <Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="81dp"/>
-
-        <EditText
-            android:id="@+id/search_input"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"/>
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#fff">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
+                        android:tint="#6d6d6d"
+                        app:srcCompat="@drawable/ic_search_white_24dp"/>
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/edit_text_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="16dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="Поиск"
+                        android:imeOptions="actionSearch"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:textColor="#2c2c2c"
+                        android:textColorHint="#4b000000"/>
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/menu_options"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:padding="4dp"
+                        app:srcCompat="@drawable/ic_more_vert_black_24dp"
+                        android:layout_gravity="center_vertical"
+                        android:tint="#6d6d6d"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-7dp"
+                android:indeterminate="true"
+                android:visibility="visible"/>
+        </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list"
