@@ -64,13 +64,13 @@ public class LoginActivity extends LifecycleActivity {
         viewModel.getLoginStatus().observe(this, status -> {
             switch (status) {
                 case ERROR:
-                    Toast.makeText(this, "Ошибка", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Неправильный номер телефона/пароль", Toast.LENGTH_SHORT).show();
+                    break;
+                case NO_INTERNET:
+                    Toast.makeText(this, "Нет подключения к интернету", Toast.LENGTH_SHORT).show();
                     break;
                 case SUCCESS:
-                    Toast.makeText(this,
-                            status + " and login " + loginPasswordPreference.getLogin() +
-                                    " and password " + loginPasswordPreference.getPassword(),
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Успешная авторизация", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                     finish();
                     break;

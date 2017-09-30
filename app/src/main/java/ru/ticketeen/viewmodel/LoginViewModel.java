@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import ru.ticketeen.App;
 import ru.ticketeen.api.ApiRequester;
 import ru.ticketeen.preference.LoginPasswordPreference;
+import ru.ticketeen.util.NetworkHelper;
 import ru.ticketeen.util.RxUtil;
 
 import static ru.ticketeen.preference.LoginPasswordPreference.EMPTY;
@@ -19,7 +20,8 @@ public class LoginViewModel extends ViewModel {
         UNKNOWN,
         IN_PROGRESS,
         SUCCESS,
-        ERROR
+        ERROR,
+        NO_INTERNET,
     }
 
     @Inject
@@ -41,6 +43,10 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void login(String user, String password) {
+        if (!new NetworkHelper().isInternetConnected(App.getContext())) {
+            loginStatus.setValue(LoginStatus.NO_INTERNET);
+            return;
+        }
         progress.setValue(true);
         loginStatus.setValue(LoginStatus.IN_PROGRESS);
         loginPasswordPreference.setLogin(user);
